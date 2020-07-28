@@ -55,7 +55,9 @@ def myClick():
         test.enrol(cou)
         test.enrol_confirmation(cou)
         test.redirect()
+    print("Closing up window ! Good Bye ")
     test.exit()
+    
 
 
 linebreak = Label(top, text="\n")

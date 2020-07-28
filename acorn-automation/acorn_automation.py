@@ -59,7 +59,6 @@ class Execute(object):
 
     def enrol(self,course):
         x_p = self.x_path(course)
-        print(x_p)
         try:
             enrol = WebDriverWait(self.driver, 15).until(
                 EC.presence_of_element_located((By.XPATH, x_p ))
@@ -75,7 +74,7 @@ class Execute(object):
             enrol_confir = WebDriverWait(self.driver, 15).until(
                 EC.presence_of_element_located((By.XPATH, '//*[@id="enrolFromPlan"]' ))
             )
-            print("Bro you're enrolled in " + course + " Congratulation")
+            print("Bro you're enrolled in " + course + " Congratulation ! :) ")
             enrol_confir.click()
         except:
             print("You were not enrolled in the Course :(")
