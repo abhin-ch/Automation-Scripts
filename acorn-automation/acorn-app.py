@@ -2,6 +2,8 @@
 from tkinter import * 
 from acorn_automation import Execute
 from tkinter import messagebox
+import time
+import datetime
 
 top = Tk()
 top.geometry('350x380')
@@ -25,10 +27,10 @@ password.insert(0, "Password...")
 
 
 
-time = Entry(top, width =20)
-time.pack()
-time.insert(0, "8:30 AM")
-tim = time.get()
+times = Entry(top, width =40)
+times.pack()
+times.insert(0, "Jul 27 2020 11:11PM")
+tim = times.get()
 
 linebreak = Label(top, text="\n")
 linebreak.pack()
@@ -37,14 +39,29 @@ courses = Entry(top, width =40)
 courses.pack()
 courses.insert(0, "  MATC01H3, ANTA01H3, PSYB70H3")
 
+def time_sec(tim):
+    tim = tim.strip()
+    # Get the current Time 
+    current_time = datetime.datetime.now()
+    # Get the entered Time 
+    entered_time = datetime.datetime.strptime(tim, '%b %d %Y %I:%M%p')
+    print(entered_time)
+    # Get the diffrence
+    time_diff = entered_time - current_time
+    seconds = time_diff.total_seconds()
+    print(seconds)
+    return seconds
 
 def myClick():
     use = username.get()
     key = password.get()
     course = courses.get()
-    start = "Script will be Running At "+ tim
+    start = "Script has ran at "+ tim
     myLabel = Label(top, text=start)
     myLabel.pack()
+    # Wait Time :
+    wait = time_sec(times.get())
+    time.sleep(wait)
     # Login and Re-Direction Manuvers 
     test = Execute()
     test.login_process(use, key)
@@ -67,3 +84,5 @@ myButton = Button(top, text="Run!", command=myClick)
 myButton.pack()
 
 top.mainloop()
+
+
